@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: @spring.active@
+mybatis-plus:
+  mapper-locations: classpath:cn.suvue.discipline.modular.mapper.mapping/*Mapper.xml
+  #实体扫描,多个包用逗号或分号隔开
+  type-aliases-package: cn.suvue.discipline.modular.entity
+  global-config:
+    #数据库相关配置
+    db-config:
+      #主键类型 AUTO:"数据库ID自增", INPUT:"用户输入ID",ID_WORKER:"全局唯一ID (数字类型唯一ID)", UUID:"全局唯一ID UUID"
+      id-type: id_worker
+      #驼峰下划线转换
+      table-underline: true
+      #逻辑删除
+      logic-delete-value: 'Y'
+      logic-not-delete-value: 'N'
+  #原生配置
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true

@@ -1,0 +1,31 @@
+server:
+  port: 80
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/self_discipline?useUnicode=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true&failOverReadOnly=false&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5 #最小空闲连接数量
+      maximum-pool-size: 20 #连接池最大连接数，默认是10
+      auto-commit: true #控制从池中获取的连接的默认自动提交行为
+      idle-timeout: 30000 #空闲连接存活的最大时间30秒
+      max-lifetime: 60000 #池中连接的最长生命周期（为0表示永生）
+      connection-timeout: 30000 #数据库连接超时时间（默认30秒）
+      pool-name: infantaHikariCP #连接池名称
+      connection-test-query: SELECT 1 FROM DUAL
+
+
+
+
+
+
+
+
+
+
+
+
+
