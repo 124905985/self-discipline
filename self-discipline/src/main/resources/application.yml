@@ -2,8 +2,8 @@ spring:
   profiles:
     active: @spring.active@
 mybatis-plus:
-  mapper-locations: classpath:cn.suvue.discipline.modular.mapper.mapping/*Mapper.xml
-  #实体扫描,多个包用逗号或分号隔开
+  mapper-locations: classpath:cn.suvue.discipline.modular.mapper.xml/*Mapper.xml
+  #别名包(实体扫描),多个包用逗号或分号隔开
   type-aliases-package: cn.suvue.discipline.modular.entity
   global-config:
     #数据库相关配置
@@ -18,4 +18,3 @@ mybatis-plus:
   #原生配置
   configuration:
     map-underscore-to-camel-case: true
-    cache-enabled: true
