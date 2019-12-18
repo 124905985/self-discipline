@@ -17,4 +17,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements IUsersService {
 
+    /**
+     * 用户注册
+     *
+     * @author suvue
+     * @date 2019/12/18 23:12
+     */
+    @Override
+    public void registerUser(String name, String password, String nick) {
+
+
+    }
 }

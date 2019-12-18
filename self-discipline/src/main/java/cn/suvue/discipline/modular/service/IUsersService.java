@@ -13,4 +13,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IUsersService extends IService<Users> {
 
+    /**
+     * 用户注册
+     *
+     * @author suvue
+     * @date 2019/12/18 23:12
+     */
+    void registerUser(String name, String password, String nick);
 }
