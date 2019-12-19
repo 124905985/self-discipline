@@ -1,14 +1,16 @@
 package cn.suvue.discipline.core.enums;
 
+import cn.suvue.discipline.core.exception.interfaces.IBaseExceptionEnum;
+
 /**
  * API返回状态码枚举
  *
  * @author suvue
  * @date 2019/11/6 21:11
  */
-public enum ResultCode {
+public enum CoreCodeEnum implements IBaseExceptionEnum {
     //成功状态码
-    SUCCESS(1, "成功"),
+    SUCCESS(200, "OK"),
     /*参数错误:1001--1999*/
     PARAM_IS_INVALID(1001, "参数无效"),
     PARAM_IS_BLANK(1002, "参数为空"),
@@ -24,7 +26,7 @@ public enum ResultCode {
     private Integer code;
     private String message;
 
-    ResultCode(Integer code, String message) {
+    CoreCodeEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }
@@ -37,4 +39,13 @@ public enum ResultCode {
         return this.message;
     }
 
+    @Override
+    public Integer getCode() {
+        return code;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
+    }
 }

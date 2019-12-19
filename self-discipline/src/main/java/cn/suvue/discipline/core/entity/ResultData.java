@@ -1,6 +1,6 @@
 package cn.suvue.discipline.core.entity;
 
-import cn.suvue.discipline.core.enums.ResultCode;
+import cn.suvue.discipline.core.enums.CoreCodeEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -24,8 +24,8 @@ public class ResultData<T> implements Serializable {
      */
     public static ResultData success() {
         ResultData result = new ResultData();
-        result.setCode(ResultCode.SUCCESS.code());
-        result.setMessage(ResultCode.SUCCESS.message());
+        result.setCode(CoreCodeEnum.SUCCESS.code());
+        result.setMessage(CoreCodeEnum.SUCCESS.message());
         return result;
     }
 
@@ -34,8 +34,8 @@ public class ResultData<T> implements Serializable {
      */
     public static <V> ResultData<V> success(Collection<V> data) {
         ResultData resultData = new ResultData();
-        resultData.setCode(ResultCode.SUCCESS.code());
-        resultData.setMessage(ResultCode.SUCCESS.message());
+        resultData.setCode(CoreCodeEnum.SUCCESS.code());
+        resultData.setMessage(CoreCodeEnum.SUCCESS.message());
         resultData.setData(data);
         return resultData;
     }
@@ -43,20 +43,20 @@ public class ResultData<T> implements Serializable {
     /**
      * 返回失败
      */
-    public static ResultData failure(ResultCode resultCode) {
+    public static ResultData failure(CoreCodeEnum coreCodeEnum) {
         ResultData result = new ResultData();
-        result.setCode(resultCode.code());
-        result.setMessage(resultCode.message());
+        result.setCode(coreCodeEnum.code());
+        result.setMessage(coreCodeEnum.message());
         return result;
     }
 
     /**
      * 返回失败
      */
-    public static <V> ResultData<V> failure(ResultCode resultCode, Collection<V> data) {
+    public static <V> ResultData<V> failure(CoreCodeEnum coreCodeEnum, Collection<V> data) {
         ResultData result = new ResultData();
-        result.setCode(resultCode.code());
-        result.setMessage(resultCode.message());
+        result.setCode(coreCodeEnum.code());
+        result.setMessage(coreCodeEnum.message());
         result.setData(data);
         return result;
     }

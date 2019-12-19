@@ -45,16 +45,16 @@ function registerUser(){
 	}
 	if(ok){//数据校验通过
 		$.ajax({
-			url:base_path+"/user/add.do",
+			url:base_path+"/user/register",
 			type:"post",
-			data:{"name":name,"nick":nick,"password":password},
+			data:{"userName":name,"nick":nick,"password":password},
 			dataType:"json",
 			success:function(result){
-				if(result.status==0){//成功
-					alert(result.msg);//提示成功
+				if(result.code===200){//成功
+					alert(result.message);//提示成功
 					$("#back").click();//转向登录界面
-				}else if(result.status==1){//用户名被占
-					$("#warning_1 span").html(result.msg);
+				}else if(result.code===2005){//用户名被占
+					$("#warning_1 span").html(result.message);
 					$("#warning_1").show();
 				}
 			},

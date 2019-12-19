@@ -3,12 +3,14 @@ package cn.suvue.discipline.modular.controller;
 
 import cn.suvue.discipline.core.entity.ResultData;
 import cn.suvue.discipline.modular.service.IUsersService;
-import cn.suvue.discipline.modular.service.impl.UsersServiceImpl;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <p>
@@ -31,11 +33,25 @@ public class UsersController {
      * @author suvue
      * @date 2019/12/18 23:11
      */
-    @RequestMapping("/register")
+    @PostMapping("/register")
     @ResponseBody
-    public ResultData registerUser(String name, String password, String nick) {
-        this.usersService.registerUser(name,password,nick);
+    public ResultData registerUser(String userName, String password, String nick) {
+        this.usersService.registerUser(userName, password, nick);
         return ResultData.success();
+    }
+
+    /**
+     * 用户登录
+     *
+     * @author suvue
+     * @date 2019/12/18 23:11
+     */
+    @PostMapping("/login")
+    public String loginUser(HttpServletResponse response,
+                            @Param("userName") String userName,
+                            @Param("password") String password) {
+         this.usersService.loginUser(response, userName, password);
+        return "index.html";
     }
 }
 
