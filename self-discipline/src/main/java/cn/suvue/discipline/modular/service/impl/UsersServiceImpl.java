@@ -89,8 +89,8 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
 
         //生成token并存入redis
         String token = RandomUtil.randomString(SysConst.TOKEN_KEY_LENGTH);
-        String userJsonStr = JSONUtil.toJsonStr(userEntity);
-        redisTemplate.opsForValue().set(token,userJsonStr, SysConst.TOKEN_EXPIRE, TimeUnit.SECONDS);
+        long expire = System.currentTimeMillis() + SysConst.TOKEN_EXPIRE;
+        redisTemplate.opsForValue().set(token,userEntity, expire, TimeUnit.SECONDS);
 
         //将token投放到cookie中
         Cookie cookie = new Cookie(SysConst.COOKIE_TOKEN_KEY, token);

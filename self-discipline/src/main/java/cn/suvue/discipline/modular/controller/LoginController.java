@@ -5,25 +5,22 @@ import cn.suvue.discipline.core.entity.ResultData;
 import cn.suvue.discipline.modular.service.IUsersService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <p>
- * 用户表 前端控制器
- * </p>
+ * 登录控制器
  *
  * @author suvue
- * @since 2019-12-17
+ * @date 2019/12/20 16:32
  */
-@RestController
-@RequestMapping("/user")
-public class UsersController {
-    public static final String PREFIX = "";
+@Controller
+public class LoginController {
+    public static final String PREFIX = "/pages";
 
     @Autowired
     private IUsersService usersService;
@@ -42,12 +39,23 @@ public class UsersController {
     }
 
     /**
-     * 用户登录
+     * 跳转向登录页
+     *
+     * @author suvue
+     * @date 2019/12/20 21:05
+     */
+    @GetMapping("/toLogin")
+    public String toLogin() {
+        return PREFIX + "/login/login.html";
+    }
+
+    /**
+     * 用户执行登录
      *
      * @author suvue
      * @date 2019/12/18 23:11
      */
-    @PostMapping("/login")
+    @PostMapping("/doLogin")
     public String loginUser(HttpServletResponse response,
                             @Param("userName") String userName,
                             @Param("password") String password) {

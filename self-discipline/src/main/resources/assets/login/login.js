@@ -45,7 +45,7 @@ function registerUser(){
 	}
 	if(ok){//数据校验通过
 		$.ajax({
-			url:base_path+"/user/register",
+			url:base_path+"/register",
 			type:"post",
 			data:{"userName":name,"nick":nick,"password":password},
 			dataType:"json",
@@ -86,7 +86,7 @@ function checkLogin(){
 	if(ok){  //检测格式通过
 		//发送ajax请求
 		$.ajax({
-			url:base_path+"/user/login.do",
+			url:base_path+"/doLogin",
 			type:"post",
 			data:{"name":name,"password":password},
 			dataType:"json",
