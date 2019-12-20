@@ -16,6 +16,8 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <!--占位符-->
+        <resource.delimiter>@</resource.delimiter>
     </properties>
 
     <dependencies>
@@ -76,6 +78,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>6.0.6</version>
+            <scope>runtime</scope>
         </dependency>
 
         <!--lombok工具-->
@@ -103,9 +106,15 @@
         <resources>
             <resource>
                 <directory>src/main/java</directory>
+                <filtering>false</filtering>
             </resource>
             <resource>
                 <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources.${spring.active}</directory>
+                <filtering>false</filtering>
             </resource>
         </resources>
         <plugins>

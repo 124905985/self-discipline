@@ -1,18 +1,19 @@
 spring:
   profiles:
     active: @spring.active@
-  #ÅäÖÃ¾²Ì¬×ÊÔ´Â·¾¶
+    #active: local
+  #é…ç½®é™æ€èµ„æºè·¯å¾„
   mvc:
     static-path-pattern: /pages/**
 mybatis-plus:
   mapper-locations: classpath:cn.suvue.discipline.modular.mapper.xml/*Mapper.xml
-  #±ğÃû°ü(ÊµÌåÉ¨Ãè),¶à¸ö°üÓÃ¶ººÅ»ò·ÖºÅ¸ô¿ª
+  #åˆ«ååŒ…(å®ä½“æ‰«æ),å¤šä¸ªåŒ…ç”¨é€—å·æˆ–åˆ†å·éš”å¼€
   type-aliases-package: cn.suvue.discipline.modular.entity
   global-config:
-    #Êı¾İ¿âÏà¹ØÅäÖÃ
+    #æ•°æ®åº“ç›¸å…³é…ç½®
     db-config:
-      #ÍÕ·åÏÂ»®Ïß×ª»»
+      #é©¼å³°ä¸‹åˆ’çº¿è½¬æ¢
       table-underline: true
-  #Ô­ÉúÅäÖÃ
+  #åŸç”Ÿé…ç½®
   configuration:
     map-underscore-to-camel-case: true
