@@ -19,8 +19,7 @@ public class AutoFieldFillHandler implements MetaObjectHandler {
 
     @Override
     public void insertFill(MetaObject metaObject) {
-        this.setFieldValByName("user_registration_time", LocalDateTime.now(),metaObject);
-        this.setFieldValByName("article_date", LocalDateTime.now(),metaObject);
+        this.setFieldValByName("userRegistrationTime", LocalDateTime.now(),metaObject);
     }
 
     @Override

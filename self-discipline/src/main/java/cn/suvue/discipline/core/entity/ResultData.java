@@ -4,7 +4,6 @@ import cn.suvue.discipline.core.enums.CoreCodeEnum;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Collection;
 
 /**
  * API返回封装类
@@ -13,9 +12,9 @@ import java.util.Collection;
  * @date 2019/11/6 21:38
  */
 @Data
-public class ResultData<T> implements Serializable {
+public class ResultData implements Serializable {
 
-    private Collection<T> data;
+    private Object data;
     private Integer code;
     private String message;
 
@@ -32,7 +31,7 @@ public class ResultData<T> implements Serializable {
     /**
      * 返回成功
      */
-    public static <V> ResultData<V> success(Collection<V> data) {
+    public static ResultData success(Object data) {
         ResultData resultData = new ResultData();
         resultData.setCode(CoreCodeEnum.SUCCESS.code());
         resultData.setMessage(CoreCodeEnum.SUCCESS.message());
@@ -53,7 +52,7 @@ public class ResultData<T> implements Serializable {
     /**
      * 返回失败
      */
-    public static <V> ResultData<V> failure(CoreCodeEnum coreCodeEnum, Collection<V> data) {
+    public static ResultData failure(CoreCodeEnum coreCodeEnum, Object data) {
         ResultData result = new ResultData();
         result.setCode(coreCodeEnum.code());
         result.setMessage(coreCodeEnum.message());
@@ -74,7 +73,7 @@ public class ResultData<T> implements Serializable {
     /**
      * 返回失败
      */
-    public static <V> ResultData<V> failure(Integer code, String message, Collection<V> data) {
+    public static ResultData failure(Integer code, String message, Object data) {
         ResultData result = new ResultData();
         result.setCode(code);
         result.setMessage(message);

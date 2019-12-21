@@ -77,13 +77,7 @@ public class Users implements Serializable {
      * 用户生日
      */
     @TableField("user_birthday")
-    private LocalDate userBirthday;
-
-    /**
-     * 用户年龄
-     */
-    @TableField("user_age")
-    private Integer userAge;
+    private LocalDateTime userBirthday;
 
     /**
      * 用户手机号

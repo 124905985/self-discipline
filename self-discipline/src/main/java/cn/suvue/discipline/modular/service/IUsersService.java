@@ -29,5 +29,5 @@ public interface IUsersService extends IService<Users> {
      * @author suvue
      * @date 2019/12/19 21:51
      */
-    void loginUser(HttpServletResponse response, String userName, String password);
+    Users loginUser(HttpServletResponse response, String userName, String password);
 }

@@ -28,31 +28,5 @@ public class UsersController {
     @Autowired
     private IUsersService usersService;
 
-    /**
-     * 用户注册
-     *
-     * @author suvue
-     * @date 2019/12/18 23:11
-     */
-    @PostMapping("/register")
-    @ResponseBody
-    public ResultData registerUser(String userName, String password, String nick) {
-        this.usersService.registerUser(userName, password, nick);
-        return ResultData.success();
-    }
-
-    /**
-     * 用户登录
-     *
-     * @author suvue
-     * @date 2019/12/18 23:11
-     */
-    @PostMapping("/login")
-    public String loginUser(HttpServletResponse response,
-                            @Param("userName") String userName,
-                            @Param("password") String password) {
-        this.usersService.loginUser(response, userName, password);
-        return PREFIX + "/index.html";
-    }
 }
 

@@ -58,8 +58,8 @@ function registerUser(){
 					$("#warning_1").show();
 				}
 			},
-			error:function(){
-				alert("注册异常");
+			error:function(result){
+				alert(result.message);
 			}
 		});
 	}
@@ -67,14 +67,14 @@ function registerUser(){
 //登录处理
 function checkLogin(){
 	//获取参数
-	var name=$("#count").val().trim();//获取输入的账号
+	var username=$("#count").val().trim();//获取输入的账号
 	var password=$("#password").val().trim();//获取输入的密码
 	//清空以前提示信息
 	$("#count_span").html("");
 	$("#password_span").html("");
 	//格式检测
 	var ok=true;
-	if(name==""){
+	if(username==""){
 		$("#count_span").html("用户不能为空");
 		ok=false;
 	}
@@ -83,30 +83,23 @@ function checkLogin(){
 		ok=false;
 	}
 	//发送请求
-	if(ok){  //检测格式通过
-		//发送ajax请求
+	if(ok){
 		$.ajax({
 			url:base_path+"/doLogin",
 			type:"post",
-			data:{"name":name,"password":password},
+			data:{"username":username,"password":password},
 			dataType:"json",
 			success:function(result){
-				//result是服务器返回的JSON结果
-				if (result.status==0) { //登录成功
-					//将用户信息保存到Cookie
-					var userName=result.data.cn_user_name;
-					var userId=result.data.cn_user_id;
-					addCookie("userId",userId,2);
-					addCookie("userName",userName,2);
-					window.location.href="edit.html";
-				}else if(result.status==1){//用户名错误
-					$("#count_span").html(result.msg);
-				}else if(result.status==2){//密码错误
-					$("#password_span").html(result.msg);
+				if (result.status===200) {
+					var users=result.data;
+					addCookie("loginUser",users,2);
+					window.location.href="/";
+				} else {
+					alert(result.message);
 				}
 			},
 			error:function(){
-				alert("登录失败!");
+				alert("登录失败！");
 			}
 		});
 	}

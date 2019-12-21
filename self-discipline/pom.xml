@@ -71,6 +71,10 @@
             <version>2.4.2</version>
         </dependency>
         <!--redis相关结束-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
 
 
         <!--java连接数据库的工具-->

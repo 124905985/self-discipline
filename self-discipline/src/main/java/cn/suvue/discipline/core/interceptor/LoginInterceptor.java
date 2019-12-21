@@ -3,10 +3,10 @@ package cn.suvue.discipline.core.interceptor;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpUtil;
 import cn.suvue.discipline.core.consts.SysConst;
 import cn.suvue.discipline.core.tools.HttpTool;
 import cn.suvue.discipline.modular.entity.Users;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -24,8 +24,10 @@ import java.io.Serializable;
  * @author suvue
  * @date 2019/12/20 15:20
  */
+@Slf4j
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
+
     @Autowired
     private RedisTemplate<String, Serializable> redisTemplate;
 
@@ -40,6 +42,10 @@ public class LoginInterceptor implements HandlerInterceptor {
         Cookie[] cookies = request.getCookies();
         //判断是否存在cookie
         if (ArrayUtil.isEmpty(cookies)) {
+            //尚未登录，跳转到登录页
+            String sendPath = HttpTool.getAbsolutePath(request, "/toLogin");
+            response.sendRedirect(sendPath);
+            log.error("请先登录");
             return false;
         }
         //遍历cookie
@@ -51,8 +57,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             //获取到存放登录用户的cookie
             if (StrUtil.equals(cookieName, SysConst.COOKIE_TOKEN_KEY)) {
                 String cookieToken = cookie.getValue();
-                Users loginUser = (Users)redisTemplate.opsForValue().get(cookieToken);
-                if (ObjectUtil.isNotEmpty(loginUser)){
+                Users loginUser = (Users) this.redisTemplate.opsForValue().get(cookieToken);
+                if (ObjectUtil.isNotEmpty(loginUser)) {
                     return true;
                 }
             }
@@ -60,6 +66,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         //尚未登录，跳转到登录页
         String sendPath = HttpTool.getAbsolutePath(request, "/toLogin");
         response.sendRedirect(sendPath);
+        log.error("请先登录");
         return false;
     }
 

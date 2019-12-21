@@ -71,7 +71,7 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
      * @date 2019/12/19 21:51
      */
     @Override
-    public void loginUser(HttpServletResponse response, String userName, String password) {
+    public Users loginUser(HttpServletResponse response, String userName, String password) {
         //校验用户是否存在
         QueryWrapper<Users> userWrapper = new QueryWrapper<>();
         userWrapper.eq("user_name", userName);
@@ -97,5 +97,6 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         cookie.setMaxAge(SysConst.TOKEN_EXPIRE);
         cookie.setPath("/");
         response.addCookie(cookie);
+        return userEntity;
     }
 }

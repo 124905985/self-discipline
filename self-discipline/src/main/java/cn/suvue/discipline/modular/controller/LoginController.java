@@ -2,11 +2,14 @@ package cn.suvue.discipline.modular.controller;
 
 
 import cn.suvue.discipline.core.entity.ResultData;
+import cn.suvue.discipline.modular.entity.Users;
 import cn.suvue.discipline.modular.service.IUsersService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -29,22 +32,11 @@ public class LoginController {
      * @author suvue
      * @date 2019/12/18 23:11
      */
-    @PostMapping("/register")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public ResultData registerUser(String userName, String password, String nick) {
         this.usersService.registerUser(userName, password, nick);
         return ResultData.success();
-    }
-
-    /**
-     * 跳转向登录页
-     *
-     * @author suvue
-     * @date 2019/12/20 21:05
-     */
-    @RequestMapping(value = "/toLogin",method = RequestMethod.GET)
-    public String toLogin() {
-        return PREFIX + "login/login.html";
     }
 
     /**
@@ -53,12 +45,13 @@ public class LoginController {
      * @author suvue
      * @date 2019/12/18 23:11
      */
-    @PostMapping("/doLogin")
-    public String loginUser(HttpServletResponse response,
-                            @Param("userName") String userName,
-                            @Param("password") String password) {
-        this.usersService.loginUser(response, userName, password);
-        return PREFIX + "index.html";
+    @ResponseBody
+    @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
+    public ResultData loginUser(HttpServletResponse response,
+                                @Param("username") String username,
+                                @Param("password") String password) {
+        Users users = this.usersService.loginUser(response, username, password);
+        return ResultData.success(users);
     }
 }
 
