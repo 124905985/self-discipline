@@ -31,4 +31,14 @@ public interface SysConst {
      * token的失效时间
      */
     Integer TOKEN_EXPIRE = 3600 * 24;
+
+    /**
+     * http协议默认端口号
+     */
+    Integer HTTP_DEFAULT_PORT = 80;
+
+    /**
+     * https协议默认端口号
+     */
+    Integer HTTPS_DEFAULT_PORT = 443;
 }

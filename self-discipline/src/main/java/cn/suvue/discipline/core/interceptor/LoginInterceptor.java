@@ -3,7 +3,9 @@ package cn.suvue.discipline.core.interceptor;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.http.HttpUtil;
 import cn.suvue.discipline.core.consts.SysConst;
+import cn.suvue.discipline.core.tools.HttpTool;
 import cn.suvue.discipline.modular.entity.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -56,7 +58,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }
         //尚未登录，跳转到登录页
-        response.sendRedirect("/toLogin");
+        String sendPath = HttpTool.getAbsolutePath(request, "/toLogin");
+        response.sendRedirect(sendPath);
         return false;
     }
 

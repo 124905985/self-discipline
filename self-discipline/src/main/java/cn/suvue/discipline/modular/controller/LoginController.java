@@ -6,9 +6,7 @@ import cn.suvue.discipline.modular.service.IUsersService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Controller
 public class LoginController {
-    public static final String PREFIX = "/pages";
+    public static final String PREFIX = "/";
 
     @Autowired
     private IUsersService usersService;
@@ -44,9 +42,9 @@ public class LoginController {
      * @author suvue
      * @date 2019/12/20 21:05
      */
-    @GetMapping("/toLogin")
+    @RequestMapping(value = "/toLogin",method = RequestMethod.GET)
     public String toLogin() {
-        return PREFIX + "/login/login.html";
+        return PREFIX + "login/login.html";
     }
 
     /**
@@ -60,7 +58,7 @@ public class LoginController {
                             @Param("userName") String userName,
                             @Param("password") String password) {
         this.usersService.loginUser(response, userName, password);
-        return PREFIX + "/index.html";
+        return PREFIX + "index.html";
     }
 }
 

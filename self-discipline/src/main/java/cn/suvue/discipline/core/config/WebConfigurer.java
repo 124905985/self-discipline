@@ -23,7 +23,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         ArrayList<String> excludePaths =
-                CollUtil.newArrayList("/login", "/register", "/pages/**");
+                CollUtil.newArrayList("/toLogin","/doLogin", "/register", "/pages/**");
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(excludePaths);

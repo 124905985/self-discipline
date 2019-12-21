@@ -5,6 +5,8 @@ spring:
   #配置静态资源路径
   mvc:
     static-path-pattern: /pages/**
+    view:
+      prefix: /pages
 mybatis-plus:
   mapper-locations: classpath:cn.suvue.discipline.modular.mapper.xml/*Mapper.xml
   #别名包(实体扫描),多个包用逗号或分号隔开
