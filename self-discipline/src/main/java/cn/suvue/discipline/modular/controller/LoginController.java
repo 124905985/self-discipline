@@ -1,6 +1,7 @@
 package cn.suvue.discipline.modular.controller;
 
 
+import cn.hutool.json.JSONUtil;
 import cn.suvue.discipline.core.entity.ResultData;
 import cn.suvue.discipline.modular.entity.Users;
 import cn.suvue.discipline.modular.service.IUsersService;
@@ -51,7 +52,7 @@ public class LoginController {
                                 @Param("username") String username,
                                 @Param("password") String password) {
         Users users = this.usersService.loginUser(response, username, password);
-        return ResultData.success(users);
+        return ResultData.success(JSONUtil.toJsonStr(users));
     }
 }
 

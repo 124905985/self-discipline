@@ -1,5 +1,6 @@
 package cn.suvue.discipline.core.interceptor;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
@@ -17,6 +18,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
+import java.util.Map;
 
 /**
  * 自定义登录拦截器
@@ -29,7 +31,7 @@ import java.io.Serializable;
 public class LoginInterceptor implements HandlerInterceptor {
 
     @Autowired
-    private RedisTemplate<String, Serializable> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 前置拦截
@@ -57,7 +59,8 @@ public class LoginInterceptor implements HandlerInterceptor {
             //获取到存放登录用户的cookie
             if (StrUtil.equals(cookieName, SysConst.COOKIE_TOKEN_KEY)) {
                 String cookieToken = cookie.getValue();
-                Users loginUser = (Users) this.redisTemplate.opsForValue().get(cookieToken);
+                Map loginUserMap = (Map) this.redisTemplate.opsForValue().get(cookieToken);
+                Users loginUser = BeanUtil.mapToBean(loginUserMap, Users.class, false);
                 if (ObjectUtil.isNotEmpty(loginUser)) {
                     return true;
                 }

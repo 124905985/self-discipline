@@ -71,11 +71,19 @@
             <version>2.4.2</version>
         </dependency>
         <!--redis相关结束-->
+
+        <!--模板语言-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
+
+        <!--解决LocalDateTime反序列化问题-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
 
         <!--java连接数据库的工具-->
         <dependency>

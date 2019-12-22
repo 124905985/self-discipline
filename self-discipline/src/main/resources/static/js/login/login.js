@@ -90,7 +90,7 @@ function checkLogin(){
 			data:{"username":username,"password":password},
 			dataType:"json",
 			success:function(result){
-				if (result.status===200) {
+				if (result.code===200) {
 					var users=result.data;
 					addCookie("loginUser",users,2);
 					window.location.href="/";

@@ -38,7 +38,7 @@ import java.util.concurrent.TimeUnit;
 public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements IUsersService {
 
     @Autowired
-    RedisTemplate<String, Serializable> redisTemplate;
+    RedisTemplate<String, Object> redisTemplate;
 
     /**
      * 用户注册

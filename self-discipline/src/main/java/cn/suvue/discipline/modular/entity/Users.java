@@ -1,13 +1,11 @@
 package cn.suvue.discipline.modular.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
@@ -18,12 +16,17 @@ import lombok.experimental.Accessors;
  * @since 2019-12-17
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
 @TableName("sd_users")
 public class Users implements Serializable {
 
-    private static final long serialVersionUID=1L;
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 无参构造函数
+     */
+    public Users() {
+
+    }
 
     /**
      * 用户ID
@@ -69,8 +72,10 @@ public class Users implements Serializable {
 
     /**
      * 注册时间
+     * JsonFormat将类似2019-12-21T23:10:32的时间转换成中国时区
      */
-    @TableField(value = "user_registration_time",fill = FieldFill.INSERT)
+    @JsonFormat(locale = "zh", timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "user_registration_time", fill = FieldFill.INSERT)
     private LocalDateTime userRegistrationTime;
 
     /**
