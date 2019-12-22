@@ -92,7 +92,7 @@ function checkLogin(){
 			success:function(result){
 				if (result.code===200) {
 					var users=result.data;
-					addCookie("loginUser",users,2);
+					addCookie(login_cookie_key,users,2);
 					window.location.href="/";
 				} else {
 					alert(result.message);

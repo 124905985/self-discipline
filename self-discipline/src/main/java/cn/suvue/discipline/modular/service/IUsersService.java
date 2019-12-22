@@ -3,6 +3,7 @@ package cn.suvue.discipline.modular.service;
 import cn.suvue.discipline.modular.entity.Users;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -30,4 +31,12 @@ public interface IUsersService extends IService<Users> {
      * @date 2019/12/19 21:51
      */
     Users loginUser(HttpServletResponse response, String userName, String password);
+
+    /**
+     * 用户执行退出
+     *
+     * @author suvue
+     * @date 2019/12/22 16:56
+     */
+    void doLoginOut(HttpServletRequest request, HttpServletResponse response);
 }

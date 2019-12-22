@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -28,7 +29,7 @@ public class LoginController {
     private IUsersService usersService;
 
     /**
-     * 用户注册
+     * 用户执行注册
      *
      * @author suvue
      * @date 2019/12/18 23:11
@@ -53,6 +54,17 @@ public class LoginController {
                                 @Param("password") String password) {
         Users users = this.usersService.loginUser(response, username, password);
         return ResultData.success(JSONUtil.toJsonStr(users));
+    }
+
+    /**
+     * 用户执行退出
+     *
+     * @author suvue
+     * @date 2019/12/22 16:55
+     */
+    @RequestMapping(value = "/doLoginOut", method = RequestMethod.GET)
+    public void doLoginOut(HttpServletRequest request, HttpServletResponse response) {
+        this.usersService.doLoginOut(request, response);
     }
 }
 

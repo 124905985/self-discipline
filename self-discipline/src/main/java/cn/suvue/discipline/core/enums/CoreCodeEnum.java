@@ -21,8 +21,8 @@ public enum CoreCodeEnum implements IBaseExceptionEnum {
     USER_LOGIN_ERROR(2002, "账号不存在或密码错误"),
     USER_ACCOUNT_FORBIDDEN(2003, "账号已被禁用"),
     USER_NOT_EXIST(2004, "用户不存在"),
-    USER_HAS_EXISTED(2005, "用户已存在");
-
+    USER_HAS_EXISTED(2005, "用户已存在"),
+    USER_LOGOUT_REDIRECT_ERROR(2006,"用户退出时跳转向登录页面时异常！");
     private Integer code;
     private String message;
 

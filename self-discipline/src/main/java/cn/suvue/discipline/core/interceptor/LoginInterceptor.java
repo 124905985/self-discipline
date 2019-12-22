@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.Serializable;
 import java.util.Map;
 
 /**
@@ -67,9 +66,9 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }
         //尚未登录，跳转到登录页
-        String sendPath = HttpTool.getAbsolutePath(request, "/toLogin");
+        String sendPath = HttpTool.getAbsolutePath(request, SysConst.TO_LOGIN_URL);
         response.sendRedirect(sendPath);
-        log.error("请先登录");
+        log.error("请先登录!");
         return false;
     }
 

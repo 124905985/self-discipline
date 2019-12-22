@@ -41,4 +41,9 @@ public interface SysConst {
      * https协议默认端口号
      */
     Integer HTTPS_DEFAULT_PORT = 443;
+
+    /**
+     * 跳转向登录页面的mapping
+     */
+    String TO_LOGIN_URL = "/toLogin";
 }

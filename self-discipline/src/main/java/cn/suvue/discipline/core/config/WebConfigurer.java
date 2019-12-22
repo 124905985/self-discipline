@@ -1,5 +1,6 @@
 package cn.suvue.discipline.core.config;
 
+import cn.suvue.discipline.core.consts.SysConst;
 import cn.suvue.discipline.core.interceptor.LoginInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +28,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns("/toLogin")
+                .excludePathPatterns(SysConst.TO_LOGIN_URL)
                 .excludePathPatterns("/doLogin")
                 .excludePathPatterns("/register")
                 .excludePathPatterns("/**/*.css")
@@ -74,7 +75,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("/home");
-        registry.addViewController("/toLogin").setViewName("/login/login");
+        registry.addViewController(SysConst.TO_LOGIN_URL).setViewName("/login/login");
     }
 
     /**

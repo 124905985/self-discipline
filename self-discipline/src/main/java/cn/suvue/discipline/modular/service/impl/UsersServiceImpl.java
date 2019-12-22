@@ -1,18 +1,18 @@
 package cn.suvue.discipline.modular.service.impl;
 
+import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
-import cn.hutool.json.JSONUtil;
 import cn.suvue.discipline.core.consts.SysConst;
 import cn.suvue.discipline.core.enums.CoreCodeEnum;
 import cn.suvue.discipline.core.exception.classes.ServiceException;
+import cn.suvue.discipline.core.tools.HttpTool;
 import cn.suvue.discipline.modular.entity.Users;
 import cn.suvue.discipline.modular.mapper.UsersMapper;
 import cn.suvue.discipline.modular.service.IUsersService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -20,10 +20,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -76,21 +75,21 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         QueryWrapper<Users> userWrapper = new QueryWrapper<>();
         userWrapper.eq("user_name", userName);
         Users userEntity = this.getOne(userWrapper);
-        if (ObjectUtil.isEmpty(userEntity)){
+        if (ObjectUtil.isEmpty(userEntity)) {
             throw new ServiceException(CoreCodeEnum.USER_NOT_EXIST);
         }
         //校验密码
         String salt = userEntity.getUserSalt();
         String inputPassword = SecureUtil.md5(password + salt);
         String dbPassword = userEntity.getUserPassword();
-        if (!StrUtil.equals(inputPassword,dbPassword)){
+        if (!StrUtil.equals(inputPassword, dbPassword)) {
             throw new ServiceException(CoreCodeEnum.USER_LOGIN_ERROR);
         }
 
         //生成token并存入redis
         String token = RandomUtil.randomString(SysConst.TOKEN_KEY_LENGTH);
         long expire = System.currentTimeMillis() + SysConst.TOKEN_EXPIRE;
-        redisTemplate.opsForValue().set(token,userEntity, expire, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(token, userEntity, expire, TimeUnit.SECONDS);
 
         //将token投放到cookie中
         Cookie cookie = new Cookie(SysConst.COOKIE_TOKEN_KEY, token);
@@ -98,5 +97,51 @@ public class UsersServiceImpl extends ServiceImpl<UsersMapper, Users> implements
         cookie.setPath("/");
         response.addCookie(cookie);
         return userEntity;
+    }
+
+    /**
+     * 用户执行退出
+     *
+     * @author suvue
+     * @date 2019/12/22 16:56
+     */
+    @Override
+    public void doLoginOut(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        String loginToken = null;
+        //删除cookie数据
+        if (ArrayUtil.isNotEmpty(cookies)) {
+            for (Cookie cookie : cookies) {
+                String cookieName = cookie.getName();
+                //cookie名为空则跳过
+                if (ObjectUtil.isEmpty(cookieName)) {
+                    continue;
+                }
+                //筛选存放登录token的redis
+                if (StrUtil.equals(cookieName, SysConst.COOKIE_TOKEN_KEY)) {
+                    String cookieValue = cookie.getValue();
+                    if (ObjectUtil.isNotEmpty(cookieValue)) {
+                        loginToken = cookieValue;
+                        //删除cookie
+                        Cookie deleteCookie = new Cookie(cookieName, null);
+                        deleteCookie.setMaxAge(0);
+                        response.addCookie(deleteCookie);
+                        break;
+                    }
+                }
+            }
+        }
+        //删除redis中缓存的用户数据
+        if (ObjectUtil.isNotEmpty(loginToken)) {
+            redisTemplate.delete(loginToken);
+        }
+
+        //跳转向登录页
+        try {
+            response.sendRedirect(HttpTool.getAbsolutePath(request, SysConst.TO_LOGIN_URL));
+        } catch (IOException e) {
+            log.error("用户退出时跳转向登录页面时异常！");
+            throw new ServiceException(CoreCodeEnum.USER_LOGOUT_REDIRECT_ERROR);
+        }
     }
 }
