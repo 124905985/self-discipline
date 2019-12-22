@@ -6,7 +6,6 @@
     <h1>欢迎来到首页！</h1>
     <script type="text/javascript" src="/static/js/common/jquery.min.js"></script> <!-- 引入jquery框架 -->
     <script type="text/javascript" src="/static/js/common/basic.js"></script> <!-- 引入项目的访问路径 -->
-    <script type="text/javascript" src="/static/js/common/cookie_util.js"></script><!-- 引入cookie -->
 </head>
 <body>
 <button type="button" id="logout">退出</button>
@@ -17,7 +16,6 @@
     });
 
     function logout() {
-        delCookie(login_cookie_key);
         window.location.href = "/doLoginOut";
     }
 </script>

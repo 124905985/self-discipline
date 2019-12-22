@@ -30,7 +30,7 @@ public interface IUsersService extends IService<Users> {
      * @author suvue
      * @date 2019/12/19 21:51
      */
-    Users loginUser(HttpServletResponse response, String userName, String password);
+    void loginUser(HttpServletResponse response, String userName, String password);
 
     /**
      * 用户执行退出

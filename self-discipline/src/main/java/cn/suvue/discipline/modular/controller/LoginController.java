@@ -1,9 +1,8 @@
 package cn.suvue.discipline.modular.controller;
 
 
-import cn.hutool.json.JSONUtil;
 import cn.suvue.discipline.core.entity.ResultData;
-import cn.suvue.discipline.modular.entity.Users;
+import cn.suvue.discipline.core.tools.HttpTool;
 import cn.suvue.discipline.modular.service.IUsersService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * 登录控制器
@@ -49,11 +49,12 @@ public class LoginController {
      */
     @ResponseBody
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
-    public ResultData loginUser(HttpServletResponse response,
-                                @Param("username") String username,
-                                @Param("password") String password) {
-        Users users = this.usersService.loginUser(response, username, password);
-        return ResultData.success(JSONUtil.toJsonStr(users));
+    public ResultData loginUser(
+            HttpServletResponse response,
+            @Param("username") String username,
+            @Param("password") String password) {
+        this.usersService.loginUser(response, username, password);
+        return ResultData.success();
     }
 
     /**
