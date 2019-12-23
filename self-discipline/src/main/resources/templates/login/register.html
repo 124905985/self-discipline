@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="/static/css/login/login.css">
     <link rel="stylesheet" href="/static/css/login/xadmin.css">
     <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
-    <script src="/static/js/login/login.js" charset="utf-8"></script>
+    <script src="/static/js/login/register.js" charset="utf-8"></script>
     <script src="/static/js/common/global.js" charset="utf-8"></script>
 
     <!--[if lt IE 9]>
@@ -23,18 +23,20 @@
 <body class="login-bg">
 
 <div class="login layui-anim layui-anim-up">
-    <div class="message">用&nbsp户&nbsp登&nbsp录</div>
+    <div class="message">注&nbsp册&nbsp新&nbsp账&nbsp户</div>
     <div id="darkbannerwrap"></div>
     <form method="post" class="layui-form">
-        <input name="username" placeholder="用户名" type="text" autocomplete="off" lay-verify="required"
-               class="layui-input">
+        <input name="username" placeholder="用户名" type="text" autocomplete="off" lay-verify="required" class="layui-input">
         <hr class="hr15">
-        <input name="password" lay-verify="required" placeholder="密码" autocomplete="off" type="password"
-               class="layui-input">
+        <input name="nick" placeholder="昵称" lay-verify="required" type="text" autocomplete="off" class="layui-input">
         <hr class="hr15">
-        <input value="登&nbsp录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+        <input name="password" lay-verify="required|pass" placeholder="密码" autocomplete="off" type="password" class="layui-input">
+        <hr class="hr15">
+        <input lay-verify="required|repass" placeholder="确认密码" autocomplete="off" type="password" class="layui-input">
+        <hr class="hr15">
+        <input value="注&nbsp册" lay-submit lay-filter="register" style="width:100%;" type="submit">
         <hr class="hr20">
-        <a href="/toRegister" style="width: 33%;float: right" class="layui-btn layui-btn-lg">前&nbsp往&nbsp注&nbsp册</a>
+        <a href="/toLogin" style="width: 33%;float: right" class="layui-btn layui-btn-lg">前&nbsp往&nbsp登&nbsp录</a>
         <hr class="hr20">
     </form>
 </div>

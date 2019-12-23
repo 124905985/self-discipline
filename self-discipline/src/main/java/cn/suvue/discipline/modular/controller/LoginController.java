@@ -2,18 +2,17 @@ package cn.suvue.discipline.modular.controller;
 
 
 import cn.suvue.discipline.core.entity.ResultData;
-import cn.suvue.discipline.core.tools.HttpTool;
 import cn.suvue.discipline.modular.service.IUsersService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.util.Map;
 
 /**
  * 登录控制器
@@ -36,7 +35,10 @@ public class LoginController {
      */
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
-    public ResultData registerUser(String userName, String password, String nick) {
+    public ResultData registerUser(@RequestBody Map<String, String> param) {
+        String userName = param.get("username");
+        String password = param.get("password");
+        String nick = param.get("nick");
         this.usersService.registerUser(userName, password, nick);
         return ResultData.success();
     }
@@ -51,8 +53,9 @@ public class LoginController {
     @RequestMapping(value = "/doLogin", method = RequestMethod.POST)
     public ResultData loginUser(
             HttpServletResponse response,
-            @Param("username") String username,
-            @Param("password") String password) {
+            @RequestBody Map<String, String> userInfo) {
+        String username = userInfo.get("username");
+        String password = userInfo.get("password");
         this.usersService.loginUser(response, username, password);
         return ResultData.success();
     }

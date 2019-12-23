@@ -29,6 +29,7 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
                 .excludePathPatterns(SysConst.TO_LOGIN_URL)
+                .excludePathPatterns(SysConst.TO_REGISTER_URL)
                 .excludePathPatterns("/doLogin")
                 .excludePathPatterns("/register")
                 .excludePathPatterns("/**/*.css")
@@ -77,6 +78,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("/home");
         registry.addViewController(SysConst.TO_LOGIN_URL).setViewName("/login/login");
+        registry.addViewController(SysConst.TO_REGISTER_URL).setViewName("/login/register");
     }
 
     /**

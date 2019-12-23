@@ -46,4 +46,9 @@ public interface SysConst {
      * 跳转向登录页面的mapping
      */
     String TO_LOGIN_URL = "/toLogin";
+
+    /**
+     * 跳转向注册页面的mapping
+     */
+    String TO_REGISTER_URL = "/toRegister";
 }
