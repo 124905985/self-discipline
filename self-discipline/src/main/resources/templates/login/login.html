@@ -1,115 +1,38 @@
-﻿<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="x-admin-sm">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>自律博客</title>
-<link rel="stylesheet" href="/static/css/login/login.css"/><!-- 样式css文件 -->
-<script type="text/javascript" 	src="/static/js/common/jquery.min.js"></script> <!-- 引入jquery框架 -->
-<script type="text/javascript" src="/static/js/common/basic.js"></script> <!-- 引入项目的访问路径 -->
-<script type="text/javascript" src="/static/js/login/login.js"></script><!-- 引入登录和注册的处理 -->
+    <meta charset="UTF-8">
+    <title>博客后台管理系统</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="stylesheet" href="/static/css/common/font.css">
+    <link rel="stylesheet" href="/static/css/login/login.css">
+    <link rel="stylesheet" href="/static/css/login/xadmin.css">
+    <script src="/static/lib/layui/layui.js" charset="utf-8"></script>
+    <script src="/static/js/login/login.js" charset="utf-8"></script>
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
-	<body>
-		<div class="global">
-		
-			<!-- 登录页面（显示） -->
-			<div class="log log_in" tabindex='-1' id='dl'>
-				<dl>
-					<dt>
-						<div class='header'>
-							<h3>欢&nbsp迎&nbsp小&nbsp主&nbsp回&nbsp家</h3>
-						</div>
-					</dt>
-					<dt></dt>
-					<dt>
-						<div class='letter'>
-							用户名:&nbsp;<input type="text" name="" id="count" tabindex='1'/>
-							<span id="count_span"></span>
-						</div>
-					</dt>
-					<dt>
-						<div class='letter'>
-							密&nbsp;&nbsp;&nbsp;码:&nbsp;<input type="password" name="" id="password" tabindex='2'/>
-							<span id="password_span"></span>
-						</div>
-					</dt>
-					<dt>
-						<div>
-							<input type="button" name="" id="login" value='&nbsp登&nbsp录&nbsp' tabindex='3'/>
-							<input type="button" name="" id="sig_in" value='&nbsp注&nbsp册&nbsp' tabindex='4'/>
-						</div>
-					</dt>
-				</dl>
-			</div>
-			
-			<!-----------------------------------分割线-------------------------------- -->
-			
-			<!-- 注册页面（隐藏） -->
-			<div class="sig sig_out" tabindex='-1' id='zc' style='visibility:hidden;'>
-				<dl>
-					<dt>
-						<div class='header'>
-							<h3>注&nbsp;册</h3>
-						</div>
-					</dt>
-					<dt></dt>
-					<dt>
-						<div class='letter'>
-							用户名:&nbsp;<input type="text" name="" id="regist_username" tabindex='5'/>
-							<div class='warning' id='warning_1'><span>该用户名不可用</span></div>
-						</div>
-					</dt>
-					<dt>
-						<div class='letter'>
-							昵&nbsp;&nbsp;&nbsp;称:&nbsp;<input type="text" name="" id="nickname" tabindex='6'/>
-						</div>
-					</dt>
-					<dt>
-						<div class='letter'>
-							密&nbsp;&nbsp;&nbsp;码:&nbsp;<input type="password" name="" id="regist_password" tabindex='7'/>
-							<div class='warning' id='warning_2'><span>密码长度不能小于6位</span></div>
-						</div>
-					</dt>
-					<dt>
-						<div class='password'>
-							&nbsp;&nbsp;&nbsp;确认密码:&nbsp;<input type="password" name="" id="final_password" tabindex='8'/>
-							<div class='warning' id='warning_3'><span>密码输入不一致</span></div>
-						</div>
-					</dt>
-					<dt>
-						<div>
-							<input type="button" name="" id="regist_button" value='&nbsp注&nbsp册&nbsp' tabindex='9'/>
-							<input type="button" name="" id="back" value='&nbsp返&nbsp回&nbsp' tabindex='10'/>
-							<!----------------------------分割线（将注册页面显示，登录页面隐藏）----------------------- -->
-							<script type="text/javascript">
-							function get(e){
-								return document.getElementById(e);
-							}
-							get('sig_in').onclick=function(){
-								get('dl').className='log log_out';
-								get('zc').className='sig sig_in';
-							}
-							get('back').onclick=function(){
-								get('zc').className='sig sig_out';
-								get('dl').className='log log_in';
-							}
-							window.onload=function(){
-								var t =setTimeout("get('zc').style.visibility='visible'",800);
-								get('regist_username').onfocus=function(){
-									get('warning_1').style.display='none';
-								}
-								get('regist_password').onfocus=function(){
-									get('warning_2').style.display='none';
-								}
-								get('final_password').onfocus=function(){
-									get('warning_3').style.display='none';
-								}
-							}
-							</script>
-						</div>
-					</dt>
-				</dl>
-			</div>
-		
-		</div>
-	</body>
+<body class="login-bg">
+
+<div class="login layui-anim layui-anim-up">
+    <div class="message">用&nbsp户&nbsp登&nbsp录</div>
+    <div id="darkbannerwrap"></div>
+    <form method="post" class="layui-form">
+        <input name="username" placeholder="用户名" type="text" autocomplete="off" lay-verify="required"
+               class="layui-input">
+        <hr class="hr15">
+        <input name="password" lay-verify="required" placeholder="密码" autocomplete="off" type="password"
+               class="layui-input">
+        <hr class="hr15">
+        <input value="登&nbsp录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+        <hr class="hr20">
+    </form>
+</div>
+</body>
 </html>

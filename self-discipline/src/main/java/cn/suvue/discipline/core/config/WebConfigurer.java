@@ -33,7 +33,8 @@ public class WebConfigurer implements WebMvcConfigurer {
                 .excludePathPatterns("/register")
                 .excludePathPatterns("/**/*.css")
                 .excludePathPatterns("/**/*.js")
-                .excludePathPatterns("/**/*.ico");
+                .excludePathPatterns("/**/*.ico")
+                .excludePathPatterns("/**/*.png");
     }
 
     /**
