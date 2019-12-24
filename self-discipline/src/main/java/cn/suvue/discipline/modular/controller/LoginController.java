@@ -22,7 +22,6 @@ import java.util.Map;
  */
 @Controller
 public class LoginController {
-    public static final String PREFIX = "/";
 
     @Autowired
     private IUsersService usersService;

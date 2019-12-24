@@ -5,6 +5,7 @@ import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.suvue.discipline.core.consts.SysConst;
+import cn.suvue.discipline.core.threadlocal.LoginHolder;
 import cn.suvue.discipline.core.tools.HttpTool;
 import cn.suvue.discipline.modular.entity.Users;
 import lombok.extern.slf4j.Slf4j;
@@ -61,6 +62,8 @@ public class LoginInterceptor implements HandlerInterceptor {
                 Map loginUserMap = (Map) this.redisTemplate.opsForValue().get(cookieToken);
                 Users loginUser = BeanUtil.mapToBean(loginUserMap, Users.class, false);
                 if (ObjectUtil.isNotEmpty(loginUser)) {
+                    //存放以便后续使用
+                    LoginHolder.setUser(loginUser);
                     return true;
                 }
             }
@@ -93,6 +96,8 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
                                 Exception ex) throws Exception {
+        //清空threadlocal
+        LoginHolder.removeUser();
 
     }
 }
