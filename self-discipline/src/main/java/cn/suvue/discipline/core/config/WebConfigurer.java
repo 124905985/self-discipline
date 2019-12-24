@@ -77,6 +77,7 @@ public class WebConfigurer implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("/index");
+        registry.addViewController("/welcome").setViewName("/welcome/welcome");
         registry.addViewController(SysConst.TO_LOGIN_URL).setViewName("/login/login");
         registry.addViewController(SysConst.TO_REGISTER_URL).setViewName("/login/register");
     }
