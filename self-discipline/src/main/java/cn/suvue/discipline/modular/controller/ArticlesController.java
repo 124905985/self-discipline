@@ -1,12 +1,12 @@
 package cn.suvue.discipline.modular.controller;
 
 
-import cn.hutool.core.util.ObjectUtil;
 import cn.suvue.discipline.core.entity.ResultData;
 import cn.suvue.discipline.modular.entity.Articles;
 import cn.suvue.discipline.modular.model.param.ArticlesParam;
 import cn.suvue.discipline.modular.model.result.ArticlesResult;
 import cn.suvue.discipline.modular.service.IArticlesService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,14 +24,15 @@ public class ArticlesController {
 
     @Autowired
     private IArticlesService articlesService;
+
     /**
      * 新增博文
      *
      * @author zhaokeyan
      * @date 2019/12/24
      */
-    @RequestMapping(value = "/add",method = RequestMethod.POST)
-    public ResultData addArticle(@RequestBody ArticlesParam param){
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    public ResultData addArticle(@RequestBody ArticlesParam param) {
         this.articlesService.addArticle(param);
         return ResultData.success();
     }
@@ -42,8 +43,8 @@ public class ArticlesController {
      * @author zhaokeyan
      * @date 2019/12/24
      */
-    @RequestMapping(value = "detail",method = RequestMethod.GET)
-    public ResultData detailArticle(@RequestParam Long articleId){
+    @RequestMapping(value = "/detail", method = RequestMethod.GET)
+    public ResultData detailArticle(@RequestParam Long articleId) {
         ArticlesResult articlesResult = this.articlesService.detailArticle(articleId);
         return ResultData.success(articlesResult);
     }
@@ -54,8 +55,8 @@ public class ArticlesController {
      * @author suvue
      * @date 2019/12/24 22:36
      */
-    @RequestMapping(value = "edit",method = RequestMethod.POST)
-    public ResultData editArticle(@RequestBody ArticlesParam articlesParam){
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public ResultData editArticle(@RequestBody ArticlesParam articlesParam) {
         this.articlesService.editArticle(articlesParam);
         return ResultData.success();
     }
@@ -66,13 +67,26 @@ public class ArticlesController {
      * @author suvue
      * @date 2019/12/24 22:43
      */
-    @RequestMapping(value = "remove",method = RequestMethod.GET)
-    public ResultData removeArticle(@RequestParam Long articleId){
+    @RequestMapping(value = "/remove", method = RequestMethod.GET)
+    public ResultData removeArticle(@RequestParam Long articleId) {
         this.articlesService.removeArticle(articleId);
         return ResultData.success();
     }
 
-
+    /**
+     * 获取新闻分页列表
+     *
+     * @author zhaokeyan
+     * @date 2019/12/25
+     */
+    @RequestMapping(value = "/pageList", method = RequestMethod.GET)
+    public ResultData pageArticle(@RequestParam Long current,
+                                  @RequestParam Long size,
+                                  @RequestParam(required = false) String title) {
+        Page<Articles> articlesPage = new Page<>(current, size);
+        this.articlesService.pageArticle(articlesPage, title);
+        return ResultData.success();
+    }
 
 }
 

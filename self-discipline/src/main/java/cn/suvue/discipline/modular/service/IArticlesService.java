@@ -3,6 +3,8 @@ package cn.suvue.discipline.modular.service;
 import cn.suvue.discipline.modular.entity.Articles;
 import cn.suvue.discipline.modular.model.param.ArticlesParam;
 import cn.suvue.discipline.modular.model.result.ArticlesResult;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -47,5 +49,11 @@ public interface IArticlesService extends IService<Articles> {
      */
     void removeArticle(Long articleId);
 
-
+    /**
+     * 获取新闻分页列表
+     *
+     * @author suvue
+     * @date 2019/12/25 17:43
+     */
+    IPage<Articles> pageArticle(Page<Articles> page, String title);
 }

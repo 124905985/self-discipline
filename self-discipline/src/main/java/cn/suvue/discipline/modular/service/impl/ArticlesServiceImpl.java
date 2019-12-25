@@ -9,6 +9,9 @@ import cn.suvue.discipline.modular.mapper.ArticlesMapper;
 import cn.suvue.discipline.modular.model.param.ArticlesParam;
 import cn.suvue.discipline.modular.model.result.ArticlesResult;
 import cn.suvue.discipline.modular.service.IArticlesService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -90,5 +93,16 @@ public class ArticlesServiceImpl extends ServiceImpl<ArticlesMapper, Articles> i
             throw new ServiceException(PARAM_IS_BLANK);
         }
         this.removeById(articleId);
+    }
+
+    /**
+     * 获取博文分页列表
+     *
+     * @author suvue
+     * @date 2019/12/25 17:43
+     */
+    @Override
+    public IPage<Articles> pageArticle(Page<Articles> page, String title) {
+        return this.baseMapper.pageArticle(page,title);
     }
 }

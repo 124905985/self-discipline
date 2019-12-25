@@ -1,5 +1,6 @@
 package cn.suvue.discipline.modular.model.param;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -55,6 +56,16 @@ public class ArticlesParam implements Serializable {
      * 点赞数
      */
     private Long articleLikeCount;
+
+    /**
+     * 博文状态
+     */
+    private String articleStatus;
+
+    /**
+     * 博文排序
+     */
+    private Integer articleSort;
 
 
 }

@@ -52,6 +52,18 @@ public class Articles implements Serializable {
     private String articleContent;
 
     /**
+     * 博文状态
+     */
+    @TableField(value = "article_status")
+    private String articleStatus;
+
+    /**
+     * 博文排序
+     */
+    @TableField(value = "article_sort")
+    private Integer articleSort;
+
+    /**
      * 浏览量
      */
     @TableField(value = "article_views")
@@ -75,5 +87,10 @@ public class Articles implements Serializable {
     @TableField(value = "article_like_count")
     private Long articleLikeCount;
 
+    /**
+     * 文章逻辑删除
+     */
+    @TableField(value = "del_flag")
+    private String delFlag;
 
 }

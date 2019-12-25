@@ -2,4 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.suvue.discipline.modular.mapper.ArticlesMapper">
 
+    <select id="pageArticle" resultType="cn.suvue.discipline.modular.entity.Articles">
+        SELECT
+        article_id AS articleId,
+        user_id AS userId,
+        article_title AS articleTitle,
+        article_content articleContent,
+        article_views AS articleViews,
+        article_comment_count AS articleCommentCount,
+        article_date AS articleDate,
+        article_like_count AS articleLikeCount,
+        article_status AS articleStatus
+    FROM
+        sd_articles
+        WHERE del_flag = 'N' ORDER BY article_sort ASC ,article_date DESC
+    </select>
 </mapper>

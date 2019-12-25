@@ -56,5 +56,15 @@ public class ArticlesResult implements Serializable {
      */
     private Long articleLikeCount;
 
+    /**
+     * 博文状态
+     */
+    private String articleStatus;
+
+    /**
+     * 博文排序
+     */
+    private Integer articleSort;
+
 
 }
