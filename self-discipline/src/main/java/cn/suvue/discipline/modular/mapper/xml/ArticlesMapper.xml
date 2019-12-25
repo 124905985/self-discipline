@@ -7,7 +7,6 @@
         article_id AS articleId,
         user_id AS userId,
         article_title AS articleTitle,
-        article_content articleContent,
         article_views AS articleViews,
         article_comment_count AS articleCommentCount,
         article_date AS articleDate,
