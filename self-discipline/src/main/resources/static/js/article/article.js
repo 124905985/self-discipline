@@ -1,5 +1,6 @@
-layui.use(['laydate', 'form', 'table'], function () {
+layui.use(['laydate', 'form', 'table', 'layer'], function () {
     var laydate = layui.laydate;
+    var layer = layui.layer;
     var form = layui.form;
     var table = layui.table;
 
@@ -18,7 +19,7 @@ layui.use(['laydate', 'form', 'table'], function () {
     table.render({
         elem: '#articleTable',
         method: 'get',
-        url: getContextPath() + '/articles/pageList',
+        url:'/articles/pageList',
         cellMinWidth: 80,
         autoSort: false,
         cols: [[
@@ -35,8 +36,13 @@ layui.use(['laydate', 'form', 'table'], function () {
         page: true,  //开启分页
         request: {
             pageName: 'current' //页码的参数名称，默认：page
-            ,limitName: 'size' //每页数据量的参数名，默认：limit
+            , limitName: 'size' //每页数据量的参数名，默认：limit
         }
+    });
+
+    //添加博文
+    form.on('submit(addArticle)', function (data) {
+        window.location.href = '/articles/add';
     });
 
     //监听事件

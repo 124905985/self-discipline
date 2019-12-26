@@ -34,7 +34,7 @@ public class ArticlesController {
      * @author suvue
      * @date 2019/12/25
      */
-    @RequestMapping(value = "/articleAdd", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String articleAdd() {
         return "/article/article_add";
     }
@@ -45,7 +45,7 @@ public class ArticlesController {
      * @author zhaokeyan
      * @date 2019/12/24
      */
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/addArticle", method = RequestMethod.POST)
     @ResponseBody
     public ResultData addArticle(@RequestBody ArticlesParam param) {
         this.articlesService.addArticle(param);

@@ -80,7 +80,7 @@ public class WebConfigurer implements WebMvcConfigurer {
         registry.addViewController("/welcome").setViewName("/welcome/welcome");
         registry.addViewController(SysConst.TO_LOGIN_URL).setViewName("/login/login");
         registry.addViewController(SysConst.TO_REGISTER_URL).setViewName("/login/register");
-        registry.addViewController("/article").setViewName("/article/article");
+        registry.addViewController("/articles").setViewName("/article/article");
     }
 
     /**
