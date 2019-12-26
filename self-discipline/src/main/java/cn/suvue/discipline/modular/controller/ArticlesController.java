@@ -1,11 +1,13 @@
 package cn.suvue.discipline.modular.controller;
 
 
+import cn.suvue.discipline.core.entity.LayuiData;
 import cn.suvue.discipline.core.entity.ResultData;
 import cn.suvue.discipline.modular.entity.Articles;
 import cn.suvue.discipline.modular.model.param.ArticlesParam;
 import cn.suvue.discipline.modular.model.result.ArticlesResult;
 import cn.suvue.discipline.modular.service.IArticlesService;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -97,12 +99,12 @@ public class ArticlesController {
      */
     @RequestMapping(value = "/pageList", method = RequestMethod.GET)
     @ResponseBody
-    public ResultData pageArticle(@RequestParam Long current,
-                                  @RequestParam Long size,
-                                  @RequestParam(required = false) String title) {
+    public LayuiData pageArticle(@RequestParam Long current,
+                                 @RequestParam Long size,
+                                 @RequestParam(required = false) String title) {
         Page<Articles> articlesPage = new Page<>(current, size);
-        this.articlesService.pageArticle(articlesPage, title);
-        return ResultData.success();
+        IPage<Articles> pageArticle = this.articlesService.pageArticle(articlesPage, title);
+        return LayuiData.success(pageArticle.getTotal(), pageArticle.getRecords());
     }
 
 }

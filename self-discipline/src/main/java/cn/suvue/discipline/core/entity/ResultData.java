@@ -40,6 +40,17 @@ public class ResultData implements Serializable {
     }
 
     /**
+     * 返回成功
+     */
+    public static ResultData success(Integer code, Object data) {
+        ResultData resultData = new ResultData();
+        resultData.setCode(code);
+        resultData.setMessage(CoreCodeEnum.SUCCESS.message());
+        resultData.setData(data);
+        return resultData;
+    }
+
+    /**
      * 返回失败
      */
     public static ResultData failure(CoreCodeEnum coreCodeEnum) {

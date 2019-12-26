@@ -12,8 +12,13 @@
         article_date AS articleDate,
         article_like_count AS articleLikeCount,
         article_status AS articleStatus
-    FROM
+        FROM
         sd_articles
-        WHERE del_flag = 'N' ORDER BY article_sort ASC ,article_date DESC
+        WHERE del_flag = 'N'
+        <if test="title != null and title != ''">
+            AND article_title LIKE CONCAT('%',#{title},'%')
+        </if>
+        ORDER BY article_sort ASC ,article_date DESC
     </select>
+
 </mapper>

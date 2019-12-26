@@ -6,7 +6,7 @@ spring:
   mvc:
     static-path-pattern: /static/**
 mybatis-plus:
-  mapper-locations: classpath:cn.suvue.discipline.modular.mapper.xml/*Mapper.xml
+  mapper-locations: classpath:cn/suvue/discipline/modular/mapper/mapping/*.xml
   #别名包(实体扫描),多个包用逗号或分号隔开
   type-aliases-package: cn.suvue.discipline.modular.entity
   global-config:

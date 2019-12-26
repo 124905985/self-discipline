@@ -16,13 +16,14 @@ layui.use(['laydate', 'form', 'table'], function () {
 
     //表格数据初始化
     table.render({
-        elem: '#articleTable'
-        , method: 'get'
-        , url: getContextPath() + '/articles/pageList' //返回一个List<Object>的list
-        , cellMinWidth: 80
-        , cols: [[
-            {field: 'articleId', title: 'articleId', hidden: true, sort: true},
-            {field: 'userId', title: 'userId', hidden: true, sort: true},
+        elem: '#articleTable',
+        method: 'get',
+        url: getContextPath() + '/articles/pageList',
+        cellMinWidth: 80,
+        autoSort: false,
+        cols: [[
+            {field: 'articleId', title: 'articleId', hide: true, sort: true},
+            {field: 'userId', title: 'userId', hide: true, sort: true},
             {field: 'articleTitle', title: '标题'},
             {field: 'articleViews', title: '浏览量'},
             {field: 'articleCommentCount', title: '评论数'},
@@ -30,9 +31,31 @@ layui.use(['laydate', 'form', 'table'], function () {
             {field: 'articleLikeCount', title: '点赞数'},
             {field: 'articleStatus', title: '状态'},
             {field: 'right', title: '操作', toolbar: '#toolbar'}
-        ]]
-        , page: true  //开启分页
+        ]],
+        page: true,  //开启分页
+        request: {
+            pageName: 'current' //页码的参数名称，默认：page
+            ,limitName: 'size' //每页数据量的参数名，默认：limit
+        }
     });
+
+    //监听事件
+    table.on('toolbar(articleTool)', function (obj) {
+        var checkStatus = table.checkStatus(obj.config.id);
+        switch (obj.event) {
+            case 'enable':
+                layer.msg('启用');
+                break;
+            case 'delete':
+                layer.msg('删除');
+                break;
+            case 'update':
+                layer.msg('编辑');
+                break;
+        }
+    });
+
+
 });
 
 /*用户-停用*/
