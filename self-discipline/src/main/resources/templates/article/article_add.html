@@ -21,48 +21,65 @@
     <![endif]-->
 </head>
 <body>
+<div class="x-nav">
+          <span class="layui-breadcrumb">
+            <a href="">首页</a>
+            <a href="/articles">博文管理</a>
+            <a href="">添加</a>
+          </span>
+    <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"
+       onclick="location.reload()" title="刷新">
+        <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i></a>
+</div>
 <div class="layui-fluid">
     <div class="layui-row">
-        <form class="layui-form">
-            <div class="layui-form-item">
-                <label for="articleTitle" class="layui-form-label">
-                    <span class="x-red">*</span>标题</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="articleTitle" name="articleTitle" required="" autocomplete="off"
-                           class="layui-input"></div>
-            </div>
-            <div class="layui-form-item">
-                <label for="articleStatus" class="layui-form-label">
-                    <span class="x-red">*</span>状态</label>
-                <div class="layui-input-inline">
-                    <select id="articleStatus" name="articleStatus" lay-verify="required">
-                        <option value="请选择"></option>
-                        <option value="ENABLE">启用</option>
-                        <option value="DISABLE">禁用</option>
-                    </select>
-            </div>
+        <div class="layui-card">
 
-            <div class="layui-form-item">
-                <label for="articleSort" class="layui-form-label">
-                    <span class="x-red">*</span>排序</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="articleSort" name="articleSort" required="" autocomplete="off"
-                           class="layui-input"></div>
-            </div>
+            <form class="layui-form">
+                <div class="layui-card-body" style="text-align: center">
+                    <div class="layui-form-item">
+                        <label for="articleTitle" class="layui-form-label">
+                            <span class="x-red">*</span>标题</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="articleTitle" name="articleTitle" lay-required="required"
+                                   autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label for="articleStatus" class="layui-form-label">
+                            <span class="x-red">*</span>状态</label>
+                        <div class="layui-input-inline">
+                            <select id="articleStatus" name="articleStatus" lay-verify="required">
+                                <option value="请选择"></option>
+                                <option value="ENABLE">发布</option>
+                                <option value="DISABLE">草稿</option>
+                            </select>
+                        </div>
+                    </div>
 
-            <div class="layui-form-item">
-                <label for="articleContent" class="layui-form-label">
-                    <span class="x-red">*</span>内容</label>
-                <div class="layui-input-inline">
-                    <input type="text" id="articleContent" name="articleContent" required="" autocomplete="off"
-                           class="layui-input"></div>
-            </div>
+                    <div class="layui-form-item">
+                        <label for="articleSort" class="layui-form-label">
+                            <span class="x-red">*</span>排序</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="articleSort" name="articleSort" required="" autocomplete="off"
+                                   class="layui-input"></div>
+                    </div>
 
-            <div class="layui-form-item">
-                <button class="layui-btn" lay-filter="cancel" lay-submit>取消</button>
-                <button class="layui-btn" lay-filter="save" lay-submit>保存</button>
-            </div>
-        </form>
+                    <div class="layui-form-item">
+                        <label for="articleContent" class="layui-form-label">
+                            <span class="x-red">*</span>内容</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="articleContent" name="articleContent" required="" autocomplete="off"
+                                   class="layui-input"></div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <button class="layui-btn" lay-filter="cancel" lay-submit>取消</button>
+                        <button class="layui-btn" lay-filter="save" lay-submit>保存</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 </body>
