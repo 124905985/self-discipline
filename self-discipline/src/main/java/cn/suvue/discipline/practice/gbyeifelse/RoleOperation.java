@@ -1,5 +1,8 @@
 package cn.suvue.discipline.practice.gbyeifelse;
 
+import cn.suvue.discipline.modular.service.IArticlesService;
+import cn.suvue.discipline.modular.service.IUsersService;
+
 /**
  * 公共接口：表示不同角色所能做的操作
  *
