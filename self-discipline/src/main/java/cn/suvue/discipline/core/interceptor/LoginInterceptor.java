@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -42,8 +43,14 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie[] cookies = request.getCookies();
-        //判断是否存在cookie
+        HttpSession session = request.getSession();
+        return true;
+
+
+
+        /*//判断是否存在cookie
         if (ArrayUtil.isEmpty(cookies)) {
+
             //尚未登录，跳转到登录页
             String sendPath = HttpTool.getAbsolutePath(request, "/toLogin");
             response.sendRedirect(sendPath);
@@ -72,7 +79,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         String sendPath = HttpTool.getAbsolutePath(request, SysConst.TO_LOGIN_URL);
         response.sendRedirect(sendPath);
         log.error("请先登录!");
-        return false;
+        return false;*/
     }
 
     /**
