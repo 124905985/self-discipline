@@ -1,7 +1,7 @@
 package cn.suvue.discipline.practice.designpattern.factorymethod.example;
 
 interface IFactory {
-    ICar createBigTruck();
+    ICar create();
 }
 
 interface ICar {
@@ -25,10 +25,10 @@ class BigTruck implements ICar {
     }
 }
 
-class Factory implements IFactory {
+class BigTruckFactory implements IFactory {
 
     @Override
-    public ICar createBigTruck() {
+    public ICar create() {
         Engine engine = new Engine();
         Tires tires = new Tires();
         Chassis chassis = new Chassis();
@@ -38,9 +38,9 @@ class Factory implements IFactory {
 }
 
 public class Client {
-    public static void main(String[] args){
-        IFactory factory = new Factory();
-        ICar bigTruck = factory.createBigTruck();
+    public static void main(String[] args) {
+        IFactory factory = new BigTruckFactory();
+        ICar bigTruck = factory.create();
         bigTruck.success();
     }
 
