@@ -30,7 +30,8 @@ public class Demo3 {
         StopThread thread = new StopThread();
         thread.start();
         Thread.sleep(2000);
-        thread.stop();
+        //thread.stop();//错误的用法
+        thread.interrupt();//正确的用法
         while (thread.isAlive()){
 
         }
