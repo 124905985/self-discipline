@@ -8,5 +8,5 @@ package cn.suvue.discipline.practice.designpattern.theobserver;
  */
 public interface Observer {
     //接收到改变通知时要进行的操作
-   public void update();
+    void update();
 }
