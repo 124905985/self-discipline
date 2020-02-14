@@ -1,14 +1,14 @@
 package cn.suvue.discipline.practice.nio;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.SelectionKey;
-import java.nio.channels.Selector;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
-import java.util.Iterator;
-import java.util.Set;
+        import java.io.IOException;
+        import java.net.InetSocketAddress;
+        import java.nio.ByteBuffer;
+        import java.nio.channels.SelectionKey;
+        import java.nio.channels.Selector;
+        import java.nio.channels.ServerSocketChannel;
+        import java.nio.channels.SocketChannel;
+        import java.util.Iterator;
+        import java.util.Set;
 
 /**
  * 通过Selector实现的服务端
@@ -81,12 +81,14 @@ public class NioServer2 {
                         }
 
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        key.cancel();
                     }
 
                 }
             }
+            selector.selectNow();
         }
+        //问题：此处一个selector监听所有事件，一个线程处理所有请求事件，会成为瓶颈，要有多线程的运用
 
     }
 }
