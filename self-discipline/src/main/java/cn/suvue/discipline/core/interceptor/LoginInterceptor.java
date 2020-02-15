@@ -47,7 +47,6 @@ public class LoginInterceptor implements HandlerInterceptor {
         return true;
 
 
-
         /*//判断是否存在cookie
         if (ArrayUtil.isEmpty(cookies)) {
 
